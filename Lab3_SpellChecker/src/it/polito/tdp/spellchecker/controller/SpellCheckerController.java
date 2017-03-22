@@ -6,13 +6,17 @@
 
 	import java.net.URL;
 	import java.util.ResourceBundle;
-	import javafx.event.ActionEvent;
+
+import it.polito.tdp.spellchecker.model.Dictionary;
+import javafx.event.ActionEvent;
 	import javafx.fxml.FXML;
 	import javafx.scene.control.Button;
 	import javafx.scene.control.ComboBox;
 	import javafx.scene.control.TextArea;
 
 	public class SpellCheckerController {
+		
+		private Dictionary dizionario;
 
 	    @FXML // ResourceBundle that was given to the FXMLLoader
 	    private ResourceBundle resources;
@@ -56,4 +60,11 @@
 	        if(cmbbox.getItems().size()>0)
 	            cmbbox.setValue(cmbbox.getItems().get(0));
 	    }
+
+		public void setDictionaryModel (Dictionary dizionario) {
+			this.dizionario=dizionario;
+			dizionario.loadDictionary(cmbbox.getValue());
+			// TODO Auto-generated method stub
+			
+		}
 	}
