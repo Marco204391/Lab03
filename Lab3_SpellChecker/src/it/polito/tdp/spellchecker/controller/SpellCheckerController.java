@@ -5,9 +5,12 @@
 	package it.polito.tdp.spellchecker.controller;
 
 	import java.net.URL;
-	import java.util.ResourceBundle;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import it.polito.tdp.spellchecker.model.Dictionary;
+import it.polito.tdp.spellchecker.model.RichWord;
 import javafx.event.ActionEvent;
 	import javafx.fxml.FXML;
 	import javafx.scene.control.Button;
@@ -41,12 +44,26 @@ import javafx.event.ActionEvent;
 
 	    @FXML
 	    void doClear(ActionEvent event) {
-
+	    	txtImput.clear();
+	    	txtOutput.clear();
 	    }
 
 	    @FXML
 	    void doSpell(ActionEvent event) {
-
+	    	dizionario.cancella();
+	    	dizionario.loadDictionary(cmbbox.getValue());
+	    	List<String> list= new LinkedList<String>();
+	    	String result="";
+	    	String input=txtImput.getText().replaceAll("[\\p{Punct}]", "");
+	    	String str []= input.split(" ");
+	    	for(int i=0; i<str.length; i++){
+	    		list.add(str[i]);
+	    	}
+	    	for(RichWord r: dizionario.spellCheckText(list))
+	    		if(!r.isCorrect()){
+	    			result+=r.getWord()+"\n";
+	    		}
+	    	txtOutput.setText(result);
 	    }
 
 	    @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -63,7 +80,6 @@ import javafx.event.ActionEvent;
 
 		public void setDictionaryModel (Dictionary dizionario) {
 			this.dizionario=dizionario;
-			dizionario.loadDictionary(cmbbox.getValue());
 			// TODO Auto-generated method stub
 			
 		}

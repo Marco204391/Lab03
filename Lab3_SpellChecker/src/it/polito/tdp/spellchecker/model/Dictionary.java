@@ -32,7 +32,7 @@ public class Dictionary {
 		}
 	}
 	public List<RichWord> spellCheckText(List<String> inputTextList){
-		
+		parole.clear();
 		RichWord r;
 		for (String s : inputTextList){
 			if (dizionario.contains(s.toLowerCase()))
@@ -42,6 +42,12 @@ public class Dictionary {
 			parole.add(r);
 		}
 			return parole;
+	}
+
+	public void cancella() {
+		dizionario.clear();
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
