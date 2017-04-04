@@ -44,7 +44,7 @@
             <TextArea fx:id="txtOutput" />
             <HBox alignment="TOP_RIGHT" spacing="6.0">
                <children>
-                  <Label text="Label" />
+                  <Label fx:id="lblerr" text="Label" visible="false" />
                   <Button fx:id="btnclear" mnemonicParsing="false" onAction="#doClear" text="Clear" />
                </children>
             </HBox>

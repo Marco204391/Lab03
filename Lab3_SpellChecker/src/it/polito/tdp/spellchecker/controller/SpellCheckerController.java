@@ -5,13 +5,12 @@
 	package it.polito.tdp.spellchecker.controller;
 
 	import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import it.polito.tdp.spellchecker.model.Dictionary;
-import it.polito.tdp.spellchecker.model.RichWord;
-import javafx.event.ActionEvent;
+	import java.util.LinkedList;
+	import java.util.List;
+	import java.util.ResourceBundle;
+	import it.polito.tdp.spellchecker.model.Dictionary;
+	import it.polito.tdp.spellchecker.model.RichWord;
+	import javafx.event.ActionEvent;
 	import javafx.fxml.FXML;
 	import javafx.scene.control.Button;
 	import javafx.scene.control.ComboBox;
@@ -39,6 +38,9 @@ import javafx.event.ActionEvent;
 	    @FXML // fx:id="txtOutput"
 	    private TextArea txtOutput; // Value injected by FXMLLoader
 
+//	    @FXML // fx:id="lblerr"
+//	    private Label lblerr; // Value injected by FXMLLoader
+	    
 	    @FXML // fx:id="btnclear"
 	    private Button btnclear; // Value injected by FXMLLoader
 
@@ -50,6 +52,7 @@ import javafx.event.ActionEvent;
 
 	    @FXML
 	    void doSpell(ActionEvent event) {
+	    	int c=0;
 	    	dizionario.cancella();
 	    	dizionario.loadDictionary(cmbbox.getValue());
 	    	List<String> list= new LinkedList<String>();
@@ -61,6 +64,7 @@ import javafx.event.ActionEvent;
 	    	}
 	    	for(RichWord r: dizionario.spellCheckText(list))
 	    		if(!r.isCorrect()){
+	    			c++;
 	    			result+=r.getWord()+"\n";
 	    		}
 	    	txtOutput.setText(result);
@@ -73,6 +77,7 @@ import javafx.event.ActionEvent;
 	        assert btn_spell != null : "fx:id=\"btn_spell\" was not injected: check your FXML file 'SpellChecker.fxml'.";
 	        assert txtOutput != null : "fx:id=\"txtOutput\" was not injected: check your FXML file 'SpellChecker.fxml'.";
 	        assert btnclear != null : "fx:id=\"btnclear\" was not injected: check your FXML file 'SpellChecker.fxml'.";
+	       // assert lblerr != null : "fx:id=\"lblerr\" was not injected: check your FXML file 'SpellChecker.fxml'.";
 	        cmbbox.getItems().addAll("English", "Italian");
 	        if(cmbbox.getItems().size()>0)
 	            cmbbox.setValue(cmbbox.getItems().get(0));
